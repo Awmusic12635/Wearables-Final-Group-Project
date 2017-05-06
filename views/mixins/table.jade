@@ -1,0 +1,33 @@
+mixin tableHeaders(headers)
+    thead
+        tr
+            each header in headers
+                th= header
+
+mixin tableRows(rowValues, prefix)
+    each value, index in rowValues
+        if (index+1) % 2 == 0
+            tr.even
+                each val, prop in value
+                    if prop != 'id'
+                        td= val
+                td.button-actions
+                    a(href="#")
+                        i.fa.fa-edit.fa-lg
+                    a(href="#")
+                        i.fa.fa-times.fa-lg
+                    a(href="/#{prefix}/details/#{value.id}")
+                        i.fa.fa-arrow-circle-right.fa-lg
+
+        else
+            tr.oddeach
+                each val, prop in value
+                    if prop != 'id'
+                        td= val
+                td.button-actions
+                    a(href="#")
+                        i.fa.fa-edit.fa-lg
+                    a(href="#")
+                        i.fa.fa-times.fa-lg
+                    a(href="/#{prefix}/details/#{value.id}")
+                        i.fa.fa-arrow-circle-right.fa-lg

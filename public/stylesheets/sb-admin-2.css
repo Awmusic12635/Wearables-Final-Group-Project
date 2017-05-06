@@ -29,10 +29,6 @@ body {
 .navbar-top-links li {
   display: inline-block;
 }
-.nav, .nav-link {
-  font-family: "Lucida Grande", "Helvetica Neue", Helvetica, sans-serif;
-  margin-left: .5em;
-}
 .navbar-top-links li:last-child {
   margin-right: 15px;
 }

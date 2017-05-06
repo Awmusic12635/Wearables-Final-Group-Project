@@ -1,0 +1,41 @@
+extends layout
+include ./mixins/table
+
+block content
+    div.row
+        div.col-lg-12
+            button.btn.btn-primary.pull-right.header-button(onclick="addDevices()")
+                i.fa.fa-plus
+                    span.label Add Device
+            h1.page-header Manage Device
+    div.row
+        div.col-lg-12
+            table.table.table-striped.table-bordered.table-hover#dataTables-example(width="100%")
+                +tableHeaders(['Title', 'Tags', 'Location', 'Checked Out', 'Actions'])
+                tbody
+                    // TODO: update with real object array
+                    +tableRows([{
+                        'id': 1,
+                        'name': 'iPhone 6 #1',
+                        'type': 'phone, iOS, cord, development',
+                        'location': 'Rm 1601, Shelf 6, Box 1',
+                        'isChecked': 'true'
+                    }, {
+                        'id': 2,
+                        'name': 'iPhone 6 #2',
+                        'type': 'phone, iOS, cord',
+                        'location': 'Rm 1601, Shelf 6, Box 1',
+                        'isChecked': 'false'
+                    }, {
+                        'id': 3,
+                        'name': 'MRI Machine',
+                        'type': 'mri, medical, large',
+                        'location': 'Rm 1902',
+                        'isChecked': 'false'
+                    }, {
+                        'id': 4,
+                        'name': 'Projector',
+                        'type': 'projector, av, setup',
+                        'location': 'Rm 1601, Shelf 9',
+                        'isChecked': 'false'
+                    }], 'devices')
