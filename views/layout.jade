@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    title= title
+
+    // bootstrap css
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u", crossorigin="anonymous")
+    //link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.7.0/metisMenu.css")
+    link(rel="stylesheet", href="/stylesheets/sb-admin-2.css")
+    //link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css")
+    link(rel="stylesheet", href="stylesheets/style.css")
+
+  body
+    div#wrapper
+      include includes/navigation
+      div#page-wrapper
+        block content
+
+    // minified js
+   script(src="https://code.jquery.com/jquery-3.2.1.min.js",  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=", crossorigin="anonymous")
+   //script(src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js")
+   //script(src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js")
+   script(src="javascripts/sb-admin-2.js")
+   script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js", integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa", crossorigin="anonymous")
+   script(src="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.7.0/metisMenu.js")
+   script(src="https://use.fontawesome.com/f7b4026e90.js")
+   script(src="javascripts/sb-admin-2.js")
