@@ -23,18 +23,7 @@ var config = {
     messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID
 };
 firebase.initializeApp(config);
-//
-// // TODO: implement authentication
-// // var auth = firebase.auth();
 var db = firebase.database();
-// var db_device = db.ref('/devices/')
-// var db_rfid = db.ref('/rfids/');
-// var db_user = db.ref('/users');
-var db_location = db.ref('buildings');
-    // .ref('/users/' + userId).once('value').then(function(snapshot) {
-    //     var username = snapshot.val().username;
-    //     // ...
-    // });
 
 var index = require('./routes/index');
 var users = require('./routes/users');
