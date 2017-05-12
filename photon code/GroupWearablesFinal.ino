@@ -1,7 +1,5 @@
 int count = 0;
 char input[12];
-char valid[13] = "0000787D5B5E";
-//TODO - get all RFID codes that will be valid
 bool flag = 0;
 const int VIBRATE_PIN = D0; //vibration motor pin
 //constants for the buzzer
@@ -12,11 +10,18 @@ const int BAD_TONE = 800;
 const int BAD_TONE_DURATION_MS = 500;
 const int BAD_REPEAT = 3;
 
+void photonFeedbackHandler(const char *topic, const char *data);
+
 void setup() {
     Serial1.begin(9600); //RFID
     Serial.begin(9600);
     pinMode(VIBRATE_PIN, OUTPUT);
     pinMode(BUZZER_PIN, OUTPUT);
+    Particle.subscribe("hook-response/nodeServerRFID", photonFeedbackHandler, MY_DEVICES);
+}
+
+void loop() {
+    scanRFID();
 }
 
 void unauthorized(){
@@ -27,7 +32,7 @@ void authorized(){
     warningTone(GOOD_TONE,GOOD_TONE_DURATION_MS, 1);
 }
 
-void loop() {
+void scanRFID(){
     if (Serial1.available()) {
         count = 0;
         
@@ -44,15 +49,8 @@ void loop() {
         
         if ((input[0] ^ input[2] ^ input[4] ^ input[6] ^ input[8] == input[10]) && (input[1] ^ input[3] ^ input[5] ^ input[7] ^ input[9] == input[11])) {
             Serial.println("Tag validated!");
-            if(compareTag(input,valid)){
-                Serial.println("good");
-                //buzz and vibrate one way
-                authorized();
-            }else{
-                Serial.println("bad");
-                //buzz and vibrate one way
-                unauthorized();
-            }
+            Serial.println(input);
+            Particle.publish("nodeServerRFID", input);
         } else {
             Serial.println("Unable to validate tag.");
         }
@@ -60,22 +58,14 @@ void loop() {
         Serial.println("Serial1 not available!");
         delay(1000);
     }
-    
-    //TODO: Implement admin connectivity - was the RFID valid or not?
 }
 
-bool compareTag(char read[12], char check[13]){
-    int count = 0;
-    boolean flag = 1;
-    while(count < 12 && flag !=0){
-        if(read[count] == check[count]){
-            flag = 1;
-        }else{
-            flag =0;
-        }
-        count++;
+void photonFeedbackHandler(const char *topic, const char *data){
+    if(data == "Valid"){
+        authorized();
+    }else{
+        unauthorized();
     }
-    return flag;
 }
 
 void warningTone(uint16_t nFreq, uint16_t nDuration, uint8_t nCount){
@@ -99,7 +89,6 @@ void playTone(uint8_t nPin, uint16_t nFreq, uint16_t nDuration){
     //if frequency or duration is 0, stop any tones
     if((nFreq == 0) || (nDuration == 0)){
         noTone(nPin);
-        
     }else{
         //output specified tone for the duration specified
         tone(nPin,nFreq, nDuration);
