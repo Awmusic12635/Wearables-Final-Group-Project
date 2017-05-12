@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  div.row
+    div.col-lg-12
+      h1.page-header Dashboard
+
+  div.row
+    div.col-lg-12.col-md-12
+      div.panel.panel-yellow
+        div.panel-heading
+          div.row
+            div.col-xs-3
+              i.fa.fa-warning.fa-5x
+            div.col-xs-9.text-right
+                div.huge 2 New Unauthorized Attempts
+        a(href="/rfid/failed-attempts")
+          div.panel-footer
+            span.pull-left View Details
+            span.pull-right
+              i.fa.fa-arrow-circle-right.fa-lg
+            div.clearfix
+  div.row
+    div.col-lg-12.col-md-12
+      | figure out what else goes here

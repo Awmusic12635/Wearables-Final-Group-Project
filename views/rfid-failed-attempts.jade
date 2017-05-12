@@ -1,0 +1,13 @@
+extends layout
+include mixins/timeline
+
+block content
+    div.row
+        div.col-lg-12
+            h1.page-header Failed Attempts
+
+    div.row
+        div.panel-body
+            ul.timeline
+                +warningPanel('Unauthorized Attempt', '11 hours ago', 'Yuqing Guo', 'iPhone #1', 'Medical')
+                +invertedDangerPanel('Unrecognized User', '8 hours ago', 'Unknown (RFID: 000918234FV7)', 'MRI', 'Unknown')

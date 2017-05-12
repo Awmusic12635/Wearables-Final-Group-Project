@@ -1,0 +1,83 @@
+mixin warningPanel(title, time, user, device, groups)
+        li
+            div.timeline-badge.warning
+                i.fa.fa-exclamation-triangle
+            div.timeline-panel
+                div.timeline-heading
+                    h4.timeline-title= title
+                    p
+                        small.text-muted
+                            i.fa.fa-clock-o
+                            |  #{time}
+                    hr
+                div.timeline-body
+                    strong= user
+                    |  attempted to checkout&nbsp;
+                    strong= device
+                    |  from the equipment rental room.
+                    br
+                    br
+                    | Current Groups are: #{groups}
+
+mixin invertedWarningPanel(title, time, user, device, groups)
+    li.timeline-inverted
+        div.timeline-badge.warning
+            i.fa.fa-exclamation-triangle
+        div.timeline-panel
+            div.timeline-heading
+                h4.timeline-title= title
+                p
+                    small.text-muted
+                        i.fa.fa-clock-o
+                        |  #{time}
+                hr
+            div.timeline-body
+                strong= user
+                |  attempted to checkout&nbsp;
+                strong= device
+                |  from the equipment rental room.
+                br
+                br
+                | Current Groups are: #{groups}
+
+mixin dangerPanel(title, time, user, device, groups)
+    li
+        div.timeline-badge.danger
+            i.fa.fa-times
+        div.timeline-panel
+            div.timeline-heading
+                h4.timeline-title= title
+                p
+                    small.text-muted
+                        i.fa.fa-clock-o
+                        |  #{time}
+                hr
+            div.timeline-body
+                strong= user
+                |  attempted to checkout&nbsp;
+                strong= device
+                |  from the equipment rental room.
+                br
+                br
+                | Current Groups are: #{groups}
+
+mixin invertedDangerPanel(title, time, user, device, groups)
+    li.timeline-inverted
+        div.timeline-badge.danger
+            i.fa.fa-times
+        div.timeline-panel
+            div.timeline-heading
+                h4.timeline-title= title
+                p
+                    small.text-muted
+                        i.fa.fa-clock-o
+                        |  #{time}
+                hr
+            div.timeline-body
+                strong= user
+                |  attempted to checkout&nbsp;
+                strong= device
+                |  from the equipment rental room.
+                br
+                br
+                | Current Groups are: #{groups}

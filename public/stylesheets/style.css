@@ -1,0 +1,17 @@
+.button-actions i { margin-right: 1em; }
+.header-button { margin-top: 2.9em; }
+.header-button .label {
+  font-family: "Lucida Grande", "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 10pt;
+}
+.nav, .nav-link {
+  font-family: "Lucida Grande", "Helvetica Neue", Helvetica, sans-serif;
+  margin-left: .5em;
+}
+
+
+  @media (max-width: 1199px) {
+    .header-button {
+      margin-top: .1em;
+    }
+  }
