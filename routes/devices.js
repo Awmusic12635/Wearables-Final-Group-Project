@@ -23,8 +23,6 @@ router.get('/add', function(req, res, next) {
         });
 });
 
-router.
-
 router.get('/details/:id', function(req, res, next) {
     console.log(req.param('id'));
     user = req.params.id;
