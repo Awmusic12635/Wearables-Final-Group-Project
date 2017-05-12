@@ -1,0 +1,37 @@
+extends layout
+
+block content
+    div.row
+        div.col-lg-12
+            h1.page-header Add New Device
+    div.row
+        div.col-lg-12
+            form
+                div.form-group
+                    h3 General Info
+                div.form-group
+                    label(for="deviceName") Device Name
+                    input.form-control#deviceName(placeholder="Name")
+                div.form-group
+                    label(for="deviceType") Device Type
+                    input.form-control#deviceType(placeholder="Type")
+                br
+
+                div.form-group
+                    h3 Location Information
+                div.form-group
+                    label(for="buildingName") Building Name
+                    select.form-control#buildingName
+                        option(value=null) Please select a building
+                        each building in buildings
+                            option(value="#{building}") #{building.number} #{building.name}
+                div.form-group
+                    label(for="roomNumber") Room Number
+                    input.form-control#roomNumber(placeholder="Room")
+                br
+                div.pull-right
+                    button.btn.btn-primary.btn-outline#deviceCancel Cancel
+                    button.btn.btn-primary(type="submit") Submit
+
+block javascript
+    script(src="/javascripts/devices.js")
