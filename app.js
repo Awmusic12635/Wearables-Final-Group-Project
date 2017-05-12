@@ -23,7 +23,6 @@ var config = {
     messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID
 };
 firebase.initializeApp(config);
-var db = firebase.database();
 
 var index = require('./routes/index');
 var users = require('./routes/users');
