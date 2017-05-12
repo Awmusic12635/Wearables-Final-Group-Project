@@ -9,8 +9,12 @@ Requirements:
 Instructions
  - `git pull upstream master`
  - `cd <project directory>`
+
  - Install dependencies: `npm install`
- - Run the local server, do one of the commands below:
-    - `node .`
-    - `npm start`
+
+ - Copy the `.env.example` file and create a file called `.env` in your root structure
+ - grab the needed variables in `.env` from Firebase
+
+ - Run the local server do:`npm start`
+       - the listen function is in `bin/www`
  - Go to: `htttp://localhost:4000`
