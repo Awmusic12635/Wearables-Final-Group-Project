@@ -9,6 +9,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var devices = require('./routes/devices');
 var rfid = require('./routes/rfid');
+var checkout = require('./routes/checkout');
 
 var app = express();
 
@@ -28,6 +29,7 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/devices', devices);
 app.use('/rfid', rfid);
+app.use('/checkout', checkout);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
