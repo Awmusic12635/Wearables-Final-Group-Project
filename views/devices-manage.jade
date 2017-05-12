@@ -4,7 +4,7 @@ include ./mixins/table
 block content
     div.row
         div.col-lg-12
-            button.btn.btn-primary.pull-right.header-button(onclick="addDevices()")
+            button.btn.btn-primary.pull-right.header-button#addDeviceBtn
                 i.fa.fa-plus
                     span.label Add Device
             h1.page-header Manage Device
@@ -39,3 +39,6 @@ block content
                         'location': 'Rm 1601, Shelf 9',
                         'isChecked': 'false'
                     }], 'devices')
+
+block javascript
+    script(src="/javascripts/devices.js")
