@@ -1,11 +1,14 @@
 var express = require('express');
 var router = express.Router();
-var firebase = require('firebase');
+//var firebase = require('firebase');
+//var db = firebase.database();
 
 /* GET manage-devices page. */
 router.get('/', function(req, res, next) {
     // pull item from /cart in firebase
-
+    db.ref('/cart').once('value').then(function(snapshot){
+       console.dir(snapshot);
+    });
     // render the template with that item
     res.render('checkout', { title: 'Cart' });
 });
