@@ -1,5 +1,5 @@
 var express = require('express');
-var firebase = require('firebase');
+var list = require('../firebase/list');
 
 var router = express.Router();
 
@@ -16,13 +16,7 @@ router.get('/groups', function(req, res, next) {
 router.get('/add', function(req, res, next) {
     var fbData = {};
 
-    function getFireBaseData(endpoint) {
-        return firebase.database().ref(endpoint).once('value').then(function (snapshot) {
-            return snapshot.val();
-        });
-    }
-
-    Promise.all([getFireBaseData("/buildings")])
+    Promise.all([list('/buildings')])
         .then(function (snapshots) {
             fbData.buildings = snapshots[0];
             res.render('devices-add', fbData);
