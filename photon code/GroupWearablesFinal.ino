@@ -1,3 +1,7 @@
+// This #include statement was automatically added by the Particle IDE.
+#include <SparkJson.h>
+#include "Particle.h"
+
 int count = 0;
 char input[12];
 bool flag = 0;
@@ -61,7 +65,18 @@ void scanRFID(){
 }
 
 void photonFeedbackHandler(const char *topic, const char *data){
-    if(data == "Valid"){
+    // This isn't particularly efficient; there are too many copies of the data floating
+	// around here, but the data is not very large and it's not kept around long so it
+	// should be fine.
+	StaticJsonBuffer<256> jsonBuffer;
+	char *mutableCopy = strdup(data);
+	JsonObject& root = jsonBuffer.parseObject(mutableCopy);
+	free(mutableCopy);
+
+	// Because of the way the webhooks work, all data, including numbers, are represented as
+	// strings, so we need to convert them back to their native data type here
+
+    if(root[0] == "success"){
         authorized();
     }else{
         unauthorized();
