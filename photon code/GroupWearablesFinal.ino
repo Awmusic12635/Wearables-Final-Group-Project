@@ -76,7 +76,7 @@ void photonFeedbackHandler(const char *topic, const char *data){
 	// Because of the way the webhooks work, all data, including numbers, are represented as
 	// strings, so we need to convert them back to their native data type here
 
-    if(root[0] == "success"){
+    if(root[“status”] == "success"){
         authorized();
     }else{
         unauthorized();
