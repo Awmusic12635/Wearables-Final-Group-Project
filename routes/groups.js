@@ -15,9 +15,14 @@ router.get('/manage', function(req, res, next) {
         });
 });
 
-router.get('/groups', function (req, res, next) {
-   res.render('groups-users', { title: 'Manage User Groups'})
+router.get('/assignments', function (req, res, next) {
+    res.render('groups-users', { title: 'Manage User Groups'})
 });
+
+
+// router.get('/groups', function (req, res, next) {
+//    res.render('groups-users', { title: 'Manage User Groups'})
+// });
 
 router.get('/details/:id', function(req, res, next) {
     console.log(req.params.id);

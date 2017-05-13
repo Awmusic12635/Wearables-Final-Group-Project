@@ -4,16 +4,12 @@ mixin tableHeaders(headers)
             each header in headers
                 th= header
 
-mixin userTableRows(rowValues, prefix, exclude)
-
-
-mixin deviceTableRows(rowValues, prefix)
-    each device, index in rowValues
+mixin tableRows(rowValues, prefix, exclude)
+    each value, index in rowValues
         tr
-            td=device.name
-            td=device.type
-            td=device.location.building + " Room " + device.location.room
-            td=""
+            each val, prop in value
+                if prop !== exclude
+                    td= val
             td.button-actions
                 a(href="#")
                     i.fa.fa-edit.fa-lg
