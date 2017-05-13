@@ -8,5 +8,5 @@ var firebase = require('firebase');
  * @param values {Object}
  */
 module.exports = function(endpoint, id, values) {
-    return firebase.database.ref(endpoint + "/" + id).set(values);
+    return firebase.database().ref(endpoint + "/" + id).set(values);
 };

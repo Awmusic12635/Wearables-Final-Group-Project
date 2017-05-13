@@ -1,0 +1,48 @@
+extends layout
+
+block content
+    div.row
+        div.col-lg-12
+            button.btn.btn-primary.pull-right.header-button(onclick="window.location.href = '/devices/manage';")
+                i.fa.fa-arrow-left
+                    span.label Back
+            h1.page-header Device Details: #{device.name}
+    div.row
+        div.col-lg-12
+            h4 Beacon Number:
+            span=beaconId
+            br
+            br
+
+            h4 Name:
+            span=device.name
+            br
+            br
+
+            h4 Description
+            span=device.description
+            br
+            br
+
+            h4 Status
+            if device.status == undefined
+                | available
+            else
+                span=device.status
+            br
+            br
+
+            h4 Current Location
+            span
+                | Building #{device.building} Room #{device.room}
+            br
+            br
+
+            h4 Groups
+            ul
+                if device.groups == undefined
+                    | No groups have been assigned. You can assign one
+                    a(href="/users/groups/add") here.
+                else
+                    each val, index in device.groups
+                        li=index

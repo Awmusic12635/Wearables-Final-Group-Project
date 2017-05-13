@@ -1,6 +1,8 @@
 var express = require('express');
 var list = require('../firebase/list');
-var create = require('../firebase/create');
+var createWithId = require('../firebase/create-id');
+var get = require('../firebase/get');
+var remove = require('../firebase/delete');
 
 var router = express.Router();
 var firebase = require('firebase');
@@ -12,48 +14,53 @@ router.get('/groups', function(req, res, next) {
 });
 
 router.get('/add', function(req, res, next) {
-    var fbData = {};
+    var data = {};
 
-    Promise.all([list('/buildings')])
+    Promise.all([list('/buildings'), list('/groups')])
         .then(function (snapshots) {
-            fbData.buildings = snapshots[0];
-            fbData.title = 'Add Devices';
-            res.render('devices-add', fbData);
+            data.buildings = snapshots[0];
+            data.groups = snapshots[1];
+            data.device = '';
+            data.device.id = '';
+            data.title = 'Add New Device';
+            res.render('devices-add', data);
+        });
+});
+
+router.get('/update/:id', function(req, res, next) {
+    var data = {};
+    var deviceId = req.params.id;
+
+    Promise.all([get('/devices', deviceId), list('/buildings'), list('/groups')])
+        .then(function (snapshots) {
+            data.device = snapshots[0];
+            data.device.id = deviceId;
+            data.buildings = snapshots[1];
+            data.groups = snapshots[2];
+            data.title = 'Update Device';
+            res.render('devices-add', data);
         });
 });
 
 // form validation
-router.post('/add', function (req, res, next) {
-    req.checkBody('name', 'Device Name required').notEmpty();
-    req.checkBody('type', 'Device Type required').notEmpty();
+router.post('/submit', function (req, res, next) {
+        var groups = {};
 
-    req.sanitize('name').escape();
-    req.sanitize('name').trim();
-    req.sanitize('type').escape();
-    req.sanitize('type').trim();
+        for (group in req.body['groups[]']) {
+            groups[group] = true;
+        }
 
-    var errors = req.validationErrors();
-    console.log(errors);
-
-    if (errors) {
-        var data =  {title: 'Add Devices', errors: errors };
-        Promise.all([list('/buildings')])
-            .then(function (snapshots) {
-                data.buildings = snapshots[0];
-                res.render('devices-add', data);
-            });
-    } else {
         var device = {
             name: req.body.name,
-            type: req.boy.type,
-            building: {
-                name: req.body.buildingName,
-                room: req.body.room
-            }
+            description: req.body.description,
+            building: req.body.building,
+            room: req.body.room,
+            status: "available",
+            groups: groups
         };
-
-        create('/devices', device).then(next())
-    }
+       createWithId('/devices', req.body.beaconId, device).then(function() {
+           res.redirect('/devices/manage');
+       });
 });
 
 /* GET manage-devices page. */
@@ -69,8 +76,25 @@ router.get('/manage', function(req, res, next) {
 });
 
 router.get('/details/:id', function(req, res, next) {
-    user = req.params.id;
-    res.render('devices-details', { title: 'Manage Device Groups', user: user });
+    var deviceId = req.params.id;
+    var data = [];
+
+    Promise.all([get('/devices', deviceId)])
+        .then(function (snapshots) {
+            data.device = snapshots[0];
+            data.beaconId = deviceId;
+            data.title = 'Device Details';
+            res.render('device-details', data);
+        });
+});
+
+router.get('/remove/:id', function(req, res, next) {
+    var deviceId = req.params.id;
+
+    Promise.all([remove('/devices', deviceId)])
+        .then(function (snapshots) {
+            res.redirect('/devices/manage');
+        });
 });
 
 router.post('/:deviceid/updatelocation', function(req, res, next) {

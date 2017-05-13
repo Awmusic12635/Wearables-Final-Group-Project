@@ -1,0 +1,22 @@
+extends layout
+
+block content
+    div.row
+        div.col-lg-12
+            h1.page-header=title
+    div.row
+        div.col-lg-12
+            form(method="post", action="/users/groups/submit")
+                div.form-group
+                    label(for="name") Group Name
+                    input.form-control#name(name="name", placeholder="Name", value="#{group.name || ''}", required="true")
+                div.form-group
+                    label Permissions
+                    each val, index in permissions
+                        br
+                        label
+                            input(type="checkbox", name="permissions[]", value="#{index}")
+                            span=" " + index
+                div.pull-right
+                    a.btn.btn-primary.btn-outline(onclick="window.location.href = '/users/groups/manage';") Cancel
+                    button.btn.btn-primary(type="submit") Submit
