@@ -31,7 +31,7 @@ router.get('/add/:device_id', function(req, res, next) {
 
         // user does not exist
         if(device == null){
-            return res.status(500);
+            return res.status(404);
         }
         var cart = {};
         cart.device = req.params.device_id;
