@@ -3,7 +3,8 @@ var firebase = require('firebase');
 /**
  * gets an object from the database
  *
- * @param endpoint
+ * @param endpoint {string}
+ * @param id {string|int}
  * @returns {!firebase.Promise.<*>|firebase.Thenable<any>|firebase.Promise<any>}
  */
 module.exports = function(endpoint, id) {

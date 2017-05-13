@@ -1,0 +1,38 @@
+extends layout
+
+block content
+    div.row
+        div.col-lg-12
+            h1.page-header Add New User
+    div.row
+        div.col-lg-12
+            form(action="/users/add", method="post")
+                if errors !== undefined
+                    div.alert.alert-warning
+                        each error in errors
+                            #{error.msg}
+                            br
+                div.form-group
+                    label(for="RFID") RFID Number
+                    input.form-control#RFID(placeholder="0007856412B")
+                    br
+                    hr
+                div.form-group
+                    label(for="firstName") First Name
+                    input.form-control#firstName(placeholder="First Name")
+                div.form-group
+                    label(for="lastName") Last Name
+                    input.form-control#lastName(placeholder="Last Name")
+                div.form-group
+                    label(for="username") Username
+                    input.form-control#username(placeholder="Username")
+                div.form-group
+                    label(for="email") Email
+                    input.form-control#email(type="email", placeholder="email@example.com")
+                br
+
+                div.pull-right
+                    button.btn.btn-primary(type="submit") Submit
+
+block javascript
+    script(src="/javascripts/devices.js")

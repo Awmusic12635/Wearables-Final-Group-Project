@@ -30,14 +30,24 @@ nav.navbar.navbar-default.navbar-static-top(role="navigation", style="margin-bot
                             span.nav-link Dashboard
                 li
                     a(href="#")
-                        i.fa.fa-users.fa-fw
+                        i.fa.fa-table.fa-fw
                             span.nav-link Users
                         span.fa.arrow
                     ul.nav.nav-second-level
                         li
-                            a(href="/users/manage") Manage Users
+                            a(href="/users/rfid/manage") Manage User / RFID Cards
                         li
-                            a(href="/users/groups") Group Assignments
+                            a(href="/users/rfid/failed") Failed Attempts
+                li
+                    a(href="#")
+                        i.fa.fa-users.fa-fw
+                            span.nav-link Groups
+                        span.fa.arrow
+                    ul.nav.nav-second-level
+                        li
+                            a(href="/users/groups/manage") Manage Groups
+                        li
+                            a(href="/users/groups/assignments") Group Assignments
                 li
                     a(href="#")
                         i.fa.fa-phone.fa-fw
@@ -48,13 +58,3 @@ nav.navbar.navbar-default.navbar-static-top(role="navigation", style="margin-bot
                             a(href="/devices/manage") Manage Devices
                         li
                             a(href="/devices/groups") Group Assignments
-                li
-                    a(href="#")
-                        i.fa.fa-table.fa-fw
-                            span.nav-link RFID
-                        span.fa.arrow
-                    ul.nav.nav-second-level
-                        li
-                            a(href="/rfid/manage") Manage RFID Cards
-                        li
-                            a(href="/rfid/failed") Failed Attempts
