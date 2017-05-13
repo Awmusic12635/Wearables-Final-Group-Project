@@ -15,8 +15,12 @@ block content
                     each val, index in permissions
                         br
                         label
-                            input(type="checkbox", name="permissions[]", value="#{index}")
-                            span=" " + index
+                            if lodash.includes(checkedPermissions, index)
+                                input(type="checkbox", name="permissions[]", value="#{index}", checked="true")
+                                span=" " + index
+                            else
+                                input(type="checkbox", name="permissions[]", value="#{index}")
+                                span=" " + index
                 div.pull-right
                     a.btn.btn-primary.btn-outline(onclick="window.location.href = '/users/groups/manage';") Cancel
                     button.btn.btn-primary(type="submit") Submit

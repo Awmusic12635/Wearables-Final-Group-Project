@@ -1,15 +1,5 @@
 
-    $('#removeDevice').click(function(event) {
-        console.log('yo');
-        event.preventDefault(); // Stops browser from navigating away from page
-
-        var data;
-        var id = $('#removeDevice').val();
-        console.log(id);
-        var url = '/devices/remove/' + id;
-
-        $.post(url, data, function(response) {
-           window.location.reload();
-        });
-    });
-
+$('.addToCart').on('click',function(){
+    var device_id = $(this).data('id');
+    $.get( "/checkout/add/"+device_id);
+});

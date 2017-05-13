@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
+
 var list = require('../firebase/list');
-var get = require('../firebase/get');
-var update = require('../firebase/update');
 var firebase = require('firebase');
 var db = firebase.database();
 
