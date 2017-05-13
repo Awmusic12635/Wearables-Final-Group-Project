@@ -3,35 +3,41 @@ extends layout
 block content
     div.row
         div.col-lg-12
-            h1.page-header Add New User
+            h1.page-header=title
     div.row
         div.col-lg-12
-            form(action="/users/add", method="post")
+            form(action="/users/rfid/submit", method="post")
                 if errors !== undefined
                     div.alert.alert-warning
                         each error in errors
                             #{error.msg}
                             br
                 div.form-group
-                    label(for="RFID") RFID Number
-                    input.form-control#RFID(placeholder="0007856412B")
+                    label(for="rfidID") RFID Number
+                    input.form-control#rfidID(name="rfidID", value="#{user.id || ''}", placeholder="0007856412B", required="true")
                     br
                     hr
                 div.form-group
-                    label(for="firstName") First Name
-                    input.form-control#firstName(placeholder="First Name")
-                div.form-group
-                    label(for="lastName") Last Name
-                    input.form-control#lastName(placeholder="Last Name")
+                    label(for="name") Name
+                    input.form-control#name(name="name", value="#{user.name || ''}", placeholder="Full Name", required="true")
                 div.form-group
                     label(for="username") Username
-                    input.form-control#username(placeholder="Username")
+                    input.form-control#username(name="username", value="#{user.username || ''}",placeholder="Username", required="true")
                 div.form-group
                     label(for="email") Email
-                    input.form-control#email(type="email", placeholder="email@example.com")
+                    input.form-control#email(name="email", value="#{user.email || ''}", type="email", placeholder="email@example.com", required="true")
+                div.form-group
+                    label Groups
+                    each val, index in groups
+                        br
+                        label
+                            input(type="checkbox", name="groups[]", value="#{index}")
+                            span=" " + index
+
                 br
 
                 div.pull-right
+                    a.btn.btn-primary.btn-outline(onclick="window.location.href = '/users/rfid/manage';") Cancel
                     button.btn.btn-primary(type="submit") Submit
 
 block javascript

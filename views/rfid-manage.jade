@@ -6,8 +6,8 @@ block content
         div.col-lg-12
             button.btn.btn-primary.pull-right.header-button(onclick="window.location.href = '/users/rfid/add';")
                 i.fa.fa-plus
-                    span.label Add RFID
-            h1.page-header Manage RFID Access
+                    span.label Add Users
+            h1.page-header Manage RFID Users
     div.row
         div.col-lg-12
             table.table.table-striped.table-bordered.table-hover#dataTables-example(width="100%")
@@ -21,9 +21,9 @@ block content
                             td=user.username
                             td=user.email
                             td.button-actions
-                                a(href="#")
+                                a(href="/users/rfid/update/#{index}")
                                     i.fa.fa-edit.fa-lg
-                                a(href="#")
+                                a(href="/users/rfid/remove/#{index}")
                                     i.fa.fa-times.fa-lg
-                                a(href="/#{prefix}/details/#{index}")
+                                a(value="/users/rfid/details/#{index}")
                                     i.fa.fa-arrow-circle-right.fa-lg

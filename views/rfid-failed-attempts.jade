@@ -1,5 +1,4 @@
 extends layout
-include mixins/timeline
 
 block content
     div.row
@@ -9,5 +8,42 @@ block content
     div.row
         div.panel-body
             ul.timeline
-                +warningPanel('Unauthorized Attempt', '11 hours ago', 'Yuqing Guo', 'iPhone #1', 'Medical')
-                +invertedDangerPanel('Unrecognized User', '8 hours ago', 'Unknown (RFID: 000918234FV7)', 'MRI', 'Unknown')
+              - var i = 1;
+               each checkout in checkouts
+                   if i % 2 == 0
+                       li.timeline-inverted
+                           div.timeline-badge.warning
+                               i.fa.fa-exclamation-triangle
+                           div.timeline-panel
+                               div.timeline-heading
+                                   h4.timeline-title Unauthorized Attempt
+                                   p
+                                       small.text-muted
+                                           i.fa.fa-clock-o
+                                            |  #{moment(timestamp).format('MM/DD/YY')}
+                                    hr
+                               div.timeline-body
+                                   strong= checkout.user
+                                   |  attempted to checkout&nbsp;
+                                   strong= checkout.device
+                                   |  from the equipment rental room.
+                                   br
+                   else
+                        li
+                           div.timeline-badge.warning
+                               i.fa.fa-exclamation-triangle
+                           div.timeline-panel
+                               div.timeline-heading
+                                   h4.timeline-title Unauthorized Attempt
+                                   p
+                                       small.text-muted
+                                           i.fa.fa-clock-o
+                                           |  #{moment(timestamp).format('MM/DD/YY')}
+                                   hr
+                               div.timeline-body
+                                   strong= checkout.user
+                                   |  attempted to checkout&nbsp;
+                                   strong= checkout.device
+                                   |  from the equipment rental room.
+                                   br
+                    - i++

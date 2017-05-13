@@ -10,77 +10,24 @@ block content
             h1.page-header Manage Users
 
     // TODO: convert to mixin
-    div.row
-        div.col-lg-12
-            div.panel.panel-default
-                div.panel-heading
-                    | Super Admin
-                div.panel-body
-                    table.table.table-striped.table-bordered.table-hover#dataTables-super-admin(width="100%")
-                        +tableHeaders(['Full Name', 'Username', 'Email', 'Actions'])
-                        tbody
-                            // TODO: update with real object array
-                            +tableRows([{
-                                'id': 1,
-                                'name': 'Julianna Gabler',
-                                'username': 'jrg4017',
-                                'email': 'jrg4017@rit.edu'
-                            }])
-    div.row
-        div.col-lg-12
-            div.panel.panel-default
-                div.panel-heading
-                    | Admin
-                div.panel-body
-                    table.table.table-striped.table-bordered.table-hover#dataTables-admin(width="100%")
-                        +tableHeaders(['Full Name', 'Username', 'Email', 'Actions'])
-                        tbody
-                            // TODO: update with real object array
-                            +tableRows([{
-                                'id': 2,
-                                'name': 'Alex Wacker',
-                                'username': 'adw4520',
-                                'email': 'adw4520@rit.edu'
-                            }, {
-                                'id': 3,
-                                'name': 'Andrew Case',
-                                'username': 'axc3154',
-                                'email': 'axc3154@rit.edu'
-                            }], 'users')
-    div.row
-        div.col-lg-12
-            div.panel.panel-default
-                div.panel-heading
-                    | Medical
-                div.panel-body
-                    table.table.table-striped.table-bordered.table-hover#dataTables-medical(width="100%")
-                        +tableHeaders(['Full Name', 'Username', 'Email', 'Actions'])
-                        tbody
-                            // TODO: update with real object array
-                            +tableRows([{
-                                'id': 4,
-                                'name': 'Yuqing Guo',
-                                'username': 'yxg2464',
-                                'email': 'yxg2464@rit.edu'
-                            }], 'users')
-    div.row
-        div.col-lg-12
-            div.panel.panel-default
-                div.panel-heading
-                    | Development
-                div.panel-body
-                    table.table.table-striped.table-bordered.table-hover#dataTables-development(width="100%")
-                        +tableHeaders(['Full Name', 'Username', 'Email', 'Actions'])
-                        tbody
-                            // TODO: update with real object array
-                            +tableRows([{
-                                'id': 1,
-                                'name': 'Julianna Gabler',
-                                'username': 'jrg4017',
-                                'email': 'jrg4017@rit.edu'
-                            }, {
-                                'id': 2,
-                                'name': 'Alex Wacker',
-                                'username': 'adw4520',
-                                'email': 'adw4520@rit.edu'
-                            }], 'users')
+
+
+    for group, index in groups
+        div.row
+            div.col-lg-12
+                div.panel.panel-default
+                    div.panel-heading=index
+                    div.panel-body
+                        table.table.table-striped.table-bordered.table-hover#dataTables-super-admin(width="100%")
+                            +tableHeaders(['User', 'Actions'])
+                            tbody
+                                tr
+                                    for val, user in group
+                                        td=user
+                                        td.button-actions
+                                            a(href="/users/groups/assignments/update/#{user}")
+                                                i.fa.fa-edit.fa-lg
+                                            a(href="/users/groups/assignments/remove/#{user}")
+                                                i.fa.fa-times.fa-lg
+                                            a(href="/users/groups/assignment/details/#{user}")
+                                                i.fa.fa-arrow-circle-right.fa-lg

@@ -11,19 +11,24 @@ block content
     div.row
         div.col-lg-12
             table.table.table-striped.table-bordered.table-hover#dataTables-example(width="100%")
-                +tableHeaders(['Title', 'Type', 'Location', 'Checked Out', 'Actions'])
+                +tableHeaders(['Title', 'Location', 'Status', 'Actions'])
                 tbody
                     each device, index in devices
                         tr
                             td=device.name
-                            td=device.type
-                            td=device.location.building + " Room " + device.location.room
-                            td=""
+                            td="Building " + device.building + " Room " + device.room
+                            td
+                                if device.status == undefined
+                                    | available
+                                else
+                                    span=device.status
                             td.button-actions
-                                a(href="#")
+                                a(href="/devices/update/#{index}")
                                     i.fa.fa-edit.fa-lg
-                                a(href="#")
+                                a(href="/devices/remove/#{index}")
                                     i.fa.fa-times.fa-lg
-                                a(href="/#{prefix}/details/#{index}")
+                                a(href="/devices/details/#{index}")
                                     i.fa.fa-arrow-circle-right.fa-lg
 
+block javascript
+    script(src="/javascripts/devices.js")

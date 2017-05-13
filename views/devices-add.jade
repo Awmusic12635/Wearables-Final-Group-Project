@@ -3,37 +3,52 @@ extends layout
 block content
     div.row
         div.col-lg-12
-            h1.page-header Add New Device
+            h1.page-header=title
     div.row
         div.col-lg-12
-            form(action="/devices/add", method="post")
+            form(method="post", action="/device/submit")
                 if errors !== undefined
                     div.alert.alert-warning
                         each error in errors
                             #{error.msg}
                             br
-
                 div.form-group
                     h3 General Info
                 div.form-group
-                    label(for="name") Device Name
-                    input.form-control#name(placeholder="Name")
+                    label(for="beaconId") Beacon Number
+                    input.form-control#beaconId(name="beaconId", placeholder="HCI0-123SD", value="#{device.id || ''}", required="true")
+                    br
                 div.form-group
-                    label(for="type") Device Type
-                    input.form-control#type(placeholder="Type")
-                br
+                    label(for="name") Device Name
+                    input.form-control#name(name="name", placeholder="Name", value="#{device.name || ''}", required="true")
+                div.form-group
+                    label(for="description") Device Description
+                    input.form-control#description(name="description", value="#{device.description || ''}", placeholder="Description of device")
+                div.form-group
+                    label Groups
+                    each val, index in groups
+                            br
+                            label
+                                input(type="checkbox", name="groups[]", value="#{index}")
+                                span=" " + index
+
 
                 div.form-group
                     h3 Location Information
                 div.form-group
-                    label(for="buildingName") Building Name
-                    select.form-control#buildingName
+                    label(for="building") Building Name
+                    select.form-control#building(name="building", required="true",)
                         option(value=null) Please select a building
-                        each building in buildings
-                            option(value="#{building.id}") #{building.number} #{building.name}
+                        each building, id in buildings
+                            if device.building !== undefined && device.building === id
+                                option(value="#{id}", selected="selected") #{building.number} #{building.name}
+                            else
+                                option(value="#{id}") #{building.number} #{building.name}
                 div.form-group
                     label(for="room") Room Number
-                    input.form-control#room(placeholder="Room")
-                br
+                    input.form-control#room(name="room", placeholder="1001", value="#{device.room || ''}", required="true")
+
+                    br
                 div.pull-right
+                    a.btn.btn-primary.btn-outline(onclick="window.location.href = '/devices/manage';") Cancel
                     button.btn.btn-primary(type="submit") Submit

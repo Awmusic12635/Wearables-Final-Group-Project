@@ -16,6 +16,6 @@
     }
   }
 
-form button {
+form button, form a {
   margin: .5em;
 }

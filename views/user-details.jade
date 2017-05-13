@@ -1,3 +1,40 @@
-//
-   Created by Don on 5/6/17.
+extends layout
 
+block content
+    div.row
+        div.col-lg-12
+            button.btn.btn-primary.pull-right.header-button(onclick="window.location.href = '/users/rfid/manage';")
+                i.fa.fa-arrow-left
+                    span.label Back
+            h1.page-header User Details: #{user.name}
+    div.row
+        div.col-lg-12
+            h4 RFID Number:
+            span=rfidID
+            br
+            br
+
+            h4 Name:
+            span=user.name
+            br
+            br
+
+            h4 Username
+            span=user.username
+            br
+            br
+
+            h4 Email
+            span=user.email
+            br
+            br
+
+            h4 Groups
+            ul
+                if user.groups == undefined
+                    | No groups have been assigned. You can assign one
+                    a(href="/users/groups/add") here.
+                else
+                    each val, index in user.groups
+                        li=index
+                        br

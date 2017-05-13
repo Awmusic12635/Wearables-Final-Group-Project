@@ -7,7 +7,7 @@ var firebase = require('firebase');
  * @param values {Object}
  */
 module.exports = function(endpoint, values) {
-    var ref = firebase.database.ref(endpoint).push(); //auto-generates key
+    var ref = firebase.database().ref(endpoint).push(); //auto-generates key
 
     return ref.set(values);
 };

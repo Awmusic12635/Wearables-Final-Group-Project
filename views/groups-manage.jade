@@ -4,24 +4,23 @@ include ./mixins/table
 block content
     div.row
         div.col-lg-12
-            button.btn.btn-primary.pull-right.header-button(onclick="addUserGroup()")
+            button.btn.btn-primary.pull-right.header-button(onclick="window.location.href = '/users/groups/add';")
                 i.fa.fa-plus
                     span.label Add Group
             h1.page-header Manage Users Group
     div.row
         div.col-lg-12
             table.table.table-striped.table-bordered.table-hover#dataTables-example(width="100%")
-                +tableHeaders(['Name', 'User Count', 'Actions'])
+                +tableHeaders(['Name', 'Actions'])
                 tbody
                     each group, index in groups
                         tr
                             // index is the RFID id
                             td=index
-                            td
                             td.button-actions
-                                a(href="#")
+                                a(href="/users/groups/update/#{index}")
                                     i.fa.fa-edit.fa-lg
-                                a(href="#")
+                                a(href="/users/groups/remove/#{index}")
                                     i.fa.fa-times.fa-lg
-                                a(href="/#{prefix}/details/#{index}")
+                                a(href="/#users/groups/details/#{index}")
                                     i.fa.fa-arrow-circle-right.fa-lg

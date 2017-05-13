@@ -3,7 +3,27 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Dashboard' });
+
+    Promise.all([list('/checkouts')])
+        .then(function (snapshots) {
+            var i = 0;
+            var checkouts = {};
+            var count = 0;
+            _.forEach((snapshots[0]), function (checkout, index) {
+                if (checkout.status === "failed") {
+                    count++;
+                }
+            });
+
+            console.log(checkouts);
+
+            var data = {};
+            data.title = 'Dashboard';
+            data.count = count;
+            res.render('index', data);
+        });
 });
 
 module.exports = router;
+
+
