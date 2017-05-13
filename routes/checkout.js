@@ -23,24 +23,25 @@ router.get('/', function(req, res, next) {
 });
 
 // Add item to checkout
-router.get('/add/:item_id', function(req, res, next) {
-    // search firebase for item by item_id
+router.get('/add/:device_id', function(req, res, next) {
+    // search firebase for item by device_id
 
-    // take that item and then update the cart item to be that item
+    db.ref('/devices/'+req.params.device_id).once('value').then(function(snapshot) {
+        var device = snapshot.val();
 
-    // return back that item is added
-
-    Promise.all([get('/devices',req.params.item_id)])
-        .then(function (snapshots) {
-            fbData.buildings = snapshots[0];
-
-            //update cart with the new device
-            update("/cart");
-
-            res.render('devices-add', fbData);
+        // user does not exist
+        if(device == null){
+            return res.status(500);
+        }
+        var cart = {};
+        cart.device = req.params.device_id;
+        cart.status="open";
+        // take that item and then update the cart item to be that item
+        db.ref('/cart').set(cart).then(function() {
+            // return back that item is added
+            return res.status(204);
         });
-
-    res.render('rfid-manage', { title: 'Manage RFID Access' });
+    });
 });
 
 //check if person has permission to checkout a specific item
