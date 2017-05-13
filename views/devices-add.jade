@@ -6,15 +6,21 @@ block content
             h1.page-header Add New Device
     div.row
         div.col-lg-12
-            form
+            form(action="/devices/add", method="post")
+                if errors !== undefined
+                    div.alert.alert-warning
+                        each error in errors
+                            #{error.msg}
+                            br
+
                 div.form-group
                     h3 General Info
                 div.form-group
-                    label(for="deviceName") Device Name
-                    input.form-control#deviceName(placeholder="Name")
+                    label(for="name") Device Name
+                    input.form-control#name(placeholder="Name")
                 div.form-group
-                    label(for="deviceType") Device Type
-                    input.form-control#deviceType(placeholder="Type")
+                    label(for="type") Device Type
+                    input.form-control#type(placeholder="Type")
                 br
 
                 div.form-group
@@ -24,14 +30,10 @@ block content
                     select.form-control#buildingName
                         option(value=null) Please select a building
                         each building in buildings
-                            option(value="#{building}") #{building.number} #{building.name}
+                            option(value="#{building.id}") #{building.number} #{building.name}
                 div.form-group
-                    label(for="roomNumber") Room Number
-                    input.form-control#roomNumber(placeholder="Room")
+                    label(for="room") Room Number
+                    input.form-control#room(placeholder="Room")
                 br
                 div.pull-right
-                    button.btn.btn-primary.btn-outline#deviceCancel Cancel
                     button.btn.btn-primary(type="submit") Submit
-
-block javascript
-    script(src="/javascripts/devices.js")

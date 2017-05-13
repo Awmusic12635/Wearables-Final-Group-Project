@@ -4,38 +4,26 @@ include ./mixins/table
 block content
     div.row
         div.col-lg-12
-            button.btn.btn-primary.pull-right.header-button(onclick="add user")
+            button.btn.btn-primary.pull-right.header-button(onclick="window.location.href = '/users/rfid/add';")
                 i.fa.fa-plus
                     span.label Add RFID
             h1.page-header Manage RFID Access
     div.row
         div.col-lg-12
             table.table.table-striped.table-bordered.table-hover#dataTables-example(width="100%")
-                +tableHeaders(['RFID Number', 'Full Name', 'Username', 'Email', 'Actions'])
+                +tableHeaders(['RFID', 'Name', 'Username', 'Email', 'Actions'])
                 tbody
-                    // TODO: update with real object array
-                    +tableRows([{
-                        'id': 1,
-                        'rfid': '0001234AB567',
-                        'name': 'Julianna Gabler',
-                        'username': 'jrg4017',
-                        'email': 'jrg4017@rit.edu'
-                    }, {
-                        'id': 2,
-                        'rfid': '000987DF6543',
-                        'name': 'Alex Wacker',
-                        'username': 'adw4520',
-                        'email': 'adw4520@rit.edu'
-                    }, {
-                        'id': 3,
-                        'rfid': '00056789BT90',
-                        'name': 'Andrew Case',
-                        'username': 'axc3154',
-                        'email': 'axc3154@rit.edu'
-                    }, {
-                        'id': 4,
-                        'rfid': '000DV1234567',
-                        'name': 'Yuqing Guo',
-                        'username': 'yxg2464',
-                        'email': 'yxg2464@rit.edu'
-                    }], 'rfid')
+                    each user, index in users
+                        tr
+                            // index is the RFID id
+                            td=index
+                            td=user.name
+                            td=user.username
+                            td=user.email
+                            td.button-actions
+                                a(href="#")
+                                    i.fa.fa-edit.fa-lg
+                                a(href="#")
+                                    i.fa.fa-times.fa-lg
+                                a(href="/#{prefix}/details/#{index}")
+                                    i.fa.fa-arrow-circle-right.fa-lg

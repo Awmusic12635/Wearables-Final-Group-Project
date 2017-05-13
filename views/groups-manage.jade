@@ -4,21 +4,20 @@ include ./mixins/table
 block content
     div.row
         div.col-lg-12
-            button.btn.btn-primary.pull-right.header-button(onclick="window.location.href = '/devices/add';")
+            button.btn.btn-primary.pull-right.header-button(onclick="addUserGroup()")
                 i.fa.fa-plus
-                    span.label Add Device
-            h1.page-header Manage Device
+                    span.label Add Group
+            h1.page-header Manage Users Group
     div.row
         div.col-lg-12
             table.table.table-striped.table-bordered.table-hover#dataTables-example(width="100%")
-                +tableHeaders(['Title', 'Type', 'Location', 'Checked Out', 'Actions'])
+                +tableHeaders(['Name', 'User Count', 'Actions'])
                 tbody
-                    each device, index in devices
+                    each group, index in groups
                         tr
-                            td=device.name
-                            td=device.type
-                            td=device.location.building + " Room " + device.location.room
-                            td=""
+                            // index is the RFID id
+                            td=index
+                            td
                             td.button-actions
                                 a(href="#")
                                     i.fa.fa-edit.fa-lg
@@ -26,4 +25,3 @@ block content
                                     i.fa.fa-times.fa-lg
                                 a(href="/#{prefix}/details/#{index}")
                                     i.fa.fa-arrow-circle-right.fa-lg
-
