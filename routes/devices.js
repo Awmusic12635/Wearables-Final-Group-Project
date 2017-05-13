@@ -43,7 +43,7 @@ router.post('/:deviceid/updatelocation', function(req, res, next) {
         device.building = buildingid;
 
         db.ref('/devices/'+deviceid).set(device).then(function(){
-            res.statusCode(204);
+            return res.statusCode(204);
         });
     });
 
