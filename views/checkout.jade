@@ -1,0 +1,28 @@
+extends layout
+
+block content
+    div.row
+        div.col-lg-12
+            button.btn.btn-primary.pull-right.header-button#addDeviceBtn
+                i.fa.fa-plus
+                    span.label Checkout Items
+            h1.page-header Cart
+    div.row
+        div.col-lg-12
+            table.table.table-striped.table-bordered.table-hover#dataTables-example(width="100%")
+                thead
+                    tr
+                        th name
+                        th description
+                        th room
+                tbody
+                    tr
+                        td #{device.name}
+                        td #{device.description}
+                        td #{device.room}
+
+
+
+
+block javascript
+    script(src="/javascripts/devices.js")

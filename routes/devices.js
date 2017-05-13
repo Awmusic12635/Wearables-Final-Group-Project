@@ -3,6 +3,8 @@ var list = require('../firebase/list');
 var create = require('../firebase/create');
 
 var router = express.Router();
+var firebase = require('firebase');
+var db = firebase.database();
 
 /* GET devices groups page. */
 router.get('/groups', function(req, res, next) {
@@ -69,6 +71,24 @@ router.get('/manage', function(req, res, next) {
 router.get('/details/:id', function(req, res, next) {
     user = req.params.id;
     res.render('devices-details', { title: 'Manage Device Groups', user: user });
+});
+
+router.post('/:deviceid/updatelocation', function(req, res, next) {
+    var deviceid = req.params.deviceid;
+    var roomid = req.body.roomid;
+    var buildingid = req.body.buildingid;
+
+    db.ref('/devices/'+deviceid).once('value').then(function(snapshot) {
+        var device = snapshot.val();
+
+        device.room = roomid;
+        device.building = buildingid;
+
+        db.ref('/devices/'+deviceid).set(device).then(function(){
+            return res.statusCode(204);
+        });
+    });
+
 });
 
 module.exports = router;
