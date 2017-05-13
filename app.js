@@ -27,6 +27,7 @@ var index = require('./routes/index');
 var groups = require('./routes/groups');
 var devices = require('./routes/devices');
 var userRfid = require('./routes/users-rfid');
+var checkout = require('./routes/checkout');
 
 var app = express();
 
@@ -46,6 +47,7 @@ app.use('/', index);
 app.use('/users/groups', groups);
 app.use('/devices', devices);
 app.use('/users/rfid', userRfid);
+app.use('/checkout', checkout);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -55,6 +57,7 @@ app.use(function(req, res, next) {
 });
 
 app.locals.moment = require('moment');
+app.locals.lodash = require('lodash');
 
 // error handler
 app.use(function(err, req, res, next) {

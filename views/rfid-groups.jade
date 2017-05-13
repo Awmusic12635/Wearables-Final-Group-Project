@@ -4,13 +4,17 @@ include ./mixins/table
 block content
     div.row
         div.col-lg-12
-            h1.page-header Manage User Groups
+            button.btn.btn-primary.pull-right.header-button(onclick="add user")
+                i.fa.fa-plus
+                    span.label Add Gr
+            h1.page-header Manage Users
 
     for group, index in groups
         div.row
             div.col-lg-12
                 div.panel.panel-default
                     div.panel-heading
+
                         button.btn.btn-primary.btn-xs.pull-right.header-button(onclick="window.location.href = '/users/groups/#{index}/add';", style="margin-top: -.1em;")
                             i.fa.fa-plus
                                 span.label Add Users
@@ -19,9 +23,13 @@ block content
                         table.table.table-striped.table-bordered.table-hover#dataTables-super-admin(width="100%")
                             +tableHeaders(['User', 'Actions'])
                             tbody
-                                for val, user in group
-                                    tr
+                                tr
+                                    for val, user in group
                                         td=user
                                         td.button-actions
+                                            a(href="/users/groups/#{index}/update/#{user}")
+                                                i.fa.fa-edit.fa-lg
                                             a(href="/users/groups/#{index}/remove/#{user}")
                                                 i.fa.fa-times.fa-lg
+                                            a(href="/users/groups/#{index}/details/#{user}")
+                                                i.fa.fa-arrow-circle-right.fa-lg

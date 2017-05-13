@@ -1,0 +1,26 @@
+extends layout
+
+block content
+    div.row
+        div.col-lg-12
+            h1.page-header=title
+    div.row
+        div.col-lg-12
+            form(method="post", action="/users/groups/#{group}/submit")
+                div.form-group
+                    h4="Group: " + group
+                hr
+                div.form-group
+                    label Users
+                    each val, index in users
+                        br
+                        label
+                            if lodash.includes(checkedUsers, index)
+                                input(type="checkbox", name="users[]", value="#{index}", checked="true")
+                                span=" " + index
+                            else
+                                input(type="checkbox", name="users[]", value="#{index}")
+                                span=" " + index
+                div.pull-right
+                    a.btn.btn-primary.btn-outline(onclick="window.location.href = '/users/groups/assignments';") Cancel
+                    button.btn.btn-primary(type="submit") Submit

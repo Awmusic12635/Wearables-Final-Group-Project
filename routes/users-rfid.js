@@ -39,9 +39,15 @@ router.get('/update/:id', function(req, res, next) {
 router.post('/submit', function (req, res, next) {
     var groups = {};
 
-    for (group in req.body['groups[]']) {
-        groups[group] = true;
+    if (!_.isArray(req.body['groups[]']) && !_.isEmpty(req.body['groups[]'])) {
+        group[req.body['groups[]']] = true;
+    } else if (_.isArray(req.body['groups[]'])){
+        _.forEach(req.body['groups[]'], function (value, index) {
+            groups[value] = [true];
+        });
     }
+
+
 
     var device = {
         name: req.body.name,
@@ -85,7 +91,6 @@ router.get('/details/:id', function(req, res, next) {
     Promise.all([get('/users', userId)])
         .then(function (snapshots) {
             data.user = snapshots[0];
-            console.log(data.user);
             data.rfidID = userId;
             data.title = 'Manage Devices';
             res.render('user-details', data);
@@ -122,8 +127,6 @@ router.get('/failed', function(req, res, next) {
                     checkouts[index] = checkout;
                 }
             });
-
-            console.log(checkouts);
 
             var data = {};
             data.title = 'Failed Attempts';

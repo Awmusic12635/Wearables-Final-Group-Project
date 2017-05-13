@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var list = require('../firebase/list');
+var _ = require('lodash');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

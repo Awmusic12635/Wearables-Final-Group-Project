@@ -20,7 +20,7 @@ Bleacon.startScanning(uuid); // scan for a specific id
 Bleacon.on('discover',function(bleacon){
 	if(beacons.map(function(e){return e.uuid;}).indexOf(bleacon.uuid==-1)){
 		beacons.push(JSON.parse(JSON.stringify(bleacon)));
-		console.log(bleacon);
+
         var deviceID = bleacon.major + "" + bleacon.minor;
         //say that the new beacon is in this room
         request.post(
